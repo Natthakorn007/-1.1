@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+
+  <title>
+    แบบบันทึกการทดลอง 1.1 — ความดันและปริมาตร
+  </title>
+
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Kanit:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- CSS -->
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  />
+
+  <!-- CHART -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="page-header">
+
+    <div class="header-inner">
+
+      <span class="badge">
+        แบบบันทึกการทดลอง 1.1
+      </span>
+
+      <h1>
+        การทดลองศึกษาความสัมพันธ์
+        <br>
+        ระหว่างความดันและปริมาตรของอากาศ
+      </h1>
+
+      <p class="subtitle">
+        วิชาเคมี
+      </p>
+
+    </div>
+
+  </header>
+
+  <!-- MAIN -->
+
+  <main class="container">
+
+    <!-- สมาชิก -->
+
+    <section class="card">
+
+      <div class="card-head">
+
+        <span class="dot dot-cyan"></span>
+
+        <h2>
+          สมาชิกกลุ่ม
+        </h2>
+
+      </div>
+
+      <div class="card-body">
+
+        <div
+          class="members-grid"
+          id="members-grid"
+        >
+        </div>
+
+        <p class="hint">
+
+          สมาชิกกลุ่มที่
+
+          <input
+            type="text"
+            id="group-num"
+            class="inline-input"
+            style="width:60px"
+            placeholder="___"
+          />
+
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- ปัญหา -->
+
+    <section class="card">
+
+      <div class="card-head">
+
+        <span class="dot dot-yellow"></span>
+
+        <h2>
+          ปัญหา / สมมติฐาน
+        </h2>
+
+      </div>
+
+      <div class="card-body">
+
+        <label class="field-label">
+          ปัญหา
+        </label>
+
+        <textarea
+          id="question"
+          class="textarea-field"
+          rows="3"
+          placeholder="กรอกปัญหาการทดลอง..."
+        ></textarea>
+
+        <label
+          class="field-label"
+          style="margin-top:14px"
+        >
+          สมมติฐาน
+        </label>
+
+        <textarea
+          id="hypothesis"
+          class="textarea-field"
+          rows="3"
+          placeholder="กรอกสมมติฐาน..."
+        ></textarea>
+
+      </div>
+
+    </section>
+
+    <!-- ตัวแปร -->
+
+    <section class="card">
+
+      <div class="card-head">
+
+        <span class="dot dot-red"></span>
+
+        <h2>
+          ตัวแปรในการทดลอง
+        </h2>
+
+        <button
+          class="btn-icon"
+          id="btn-add-ctrl"
+        >
+          ＋ เพิ่มตัวแปรควบคุม
+        </button>
+
+      </div>
+
+      <div class="card-body">
+
+        <div class="var-grid">
+
+          <!-- ตัวแปรต้น -->
+
+          <div class="var-card var-ind">
+
+            <div class="var-tag">
+              ตัวแปรต้น
+            </div>
+
+            <input
+              type="text"
+              class="var-input"
+              id="var-ind"
+              value="ความดันของอากาศ (P)"
+            />
+
+            <div class="var-unit-row">
+
+              <span>หน่วย:</span>
+
+              <select
+                class="unit-select"
+                id="unit-P"
+              >
+                <option value="kPa">
+                  kPa
+                </option>
+
+                <option value="Pa">
+                  Pa
+                </option>
+
+                <option value="atm">
+                  atm
+                </option>
+
+                <option value="cmHg">
+                  cmHg
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+          <!-- ตัวแปรตาม -->
+
+          <div class="var-card var-dep">
+
+            <div class="var-tag">
+              ตัวแปรตาม
+            </div>
+
+            <input
+              type="text"
+              class="var-input"
+              id="var-dep"
+              value="ปริมาตรของอากาศ (V)"
+            />
+
+            <div class="var-unit-row">
+
+              <span>หน่วย:</span>
+
+              <select
+                class="unit-select"
+                id="unit-V"
+              >
+
+                <option value="mL">
+                  mL
+                </option>
+
+                <option value="cm³">
+                  cm³
+                </option>
+
+                <option value="L">
+                  L
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+          <!-- ตัวแปรควบคุม -->
+
+          <div class="var-card var-ctrl">
+
+            <div class="var-tag">
+              ตัวแปรควบคุม
+            </div>
+
+            <div id="ctrl-list">
+
+              <input
+                type="text"
+                class="var-input ctrl-item"
+                value="อุณหภูมิ"
+              />
+
+              <input
+                type="text"
+                class="var-input ctrl-item"
+                value="ชนิดของก๊าซ"
+              />
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ตาราง -->
+
+    <section class="card">
+
+      <div class="card-head">
+
+        <span class="dot dot-green"></span>
+
+        <h2>
+          ตารางบันทึกผลการทดลอง
+        </h2>
+
+        <div class="btn-row">
+
+          <button
+            class="btn-sm"
+            id="btn-add-row"
+          >
+            ＋ เพิ่มแถว
+          </button>
+
+          <button
+            class="btn-sm btn-danger"
+            id="btn-del-row"
+          >
+            － ลบแถว
+          </button>
+
+          <button
+            class="btn-sm btn-accent"
+            id="btn-calc"
+          >
+            ⚙ คำนวณ
+          </button>
+
+        </div>
+
+      </div>
+
+      <div
+        class="card-body"
+        style="padding:0"
+      >
+
+        <div class="table-wrap">
+
+          <table id="data-table">
+
+            <thead id="table-head">
+            </thead>
+
+            <tbody id="table-body">
+            </tbody>
+
+            <tfoot id="table-foot">
+            </tfoot>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- กราฟ -->
+
+    <section class="card">
+
+      <div class="card-head">
+
+        <span class="dot dot-purple"></span>
+
+        <h2>
+          กราฟความสัมพันธ์
+        </h2>
+
+        <div class="btn-row">
+
+          <button
+            class="btn-sm btn-accent"
+            id="btn-draw"
+          >
+            📈 วาดกราฟ
+          </button>
+
+          <select
+            class="unit-select"
+            id="chart-type"
+          >
+
+            <option value="scatter">
+              Scatter
+            </option>
+
+            <option value="line">
+              Line
+            </option>
+
+            <option value="pv-product">
+              P × V
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div class="chart-container">
+
+          <canvas id="main-chart"></canvas>
+
+        </div>
+
+        <div
+          class="chart-note"
+          id="chart-note"
+        >
+          กดวาดกราฟหลังกรอกข้อมูล
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- สรุป -->
+
+    <section class="card">
+
+      <div class="card-head">
+
+        <span class="dot dot-cyan"></span>
+
+        <h2>
+          สรุปผลการทดลอง
+        </h2>
+
+      </div>
+
+      <div class="card-body">
+
+        <label class="field-label">
+          ผลการทดลอง
+        </label>
+
+        <textarea
+          id="result-text"
+          class="textarea-field"
+          rows="4"
+        ></textarea>
+
+        <label
+          class="field-label"
+          style="margin-top:14px"
+        >
+          สรุปผล
+        </label>
+
+        <textarea
+          id="conclusion-text"
+          class="textarea-field"
+          rows="4"
+        ></textarea>
+
+        <div class="pv-summary">
+
+          <span class="pv-label">
+            ค่าเฉลี่ย P × V =
+          </span>
+
+          <span
+            class="pv-value"
+            id="pv-avg"
+          >
+            —
+          </span>
+
+          <span
+            class="pv-unit"
+            id="pv-unit-display"
+          >
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ACTION -->
+
+    <div class="action-bar">
+
+      <button
+        class="btn-main"
+        id="btn-save"
+      >
+        💾 บันทึก
+      </button>
+
+      <button
+        class="btn-main btn-secondary"
+        id="btn-print"
+      >
+        🖨 พิมพ์
+      </button>
+
+      <button
+        class="btn-main btn-danger-outline"
+        id="btn-reset"
+      >
+        🗑 รีเซ็ต
+      </button>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer class="page-footer">
+
+    แบบบันทึกการทดลองเคมี
+    · Boyle's Law
+
+  </footer>
+
+  <!-- DATA -->
+
+  <script>
+    const DEFAULT_MEMBERS = 5;
+    const DEFAULT_ROWS = 5;
+  </script>
+
+  <!-- APP -->
+
+  <script src="js/app.js"></script>
+
+</body>
+</html>
